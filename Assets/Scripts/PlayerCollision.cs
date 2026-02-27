@@ -3,26 +3,36 @@ using UnityEngine.AI;
 
 public class PlayerCollision : MonoBehaviour
 {
+    private CoinCounter coinCounter;
+
+    private void Awake()
+    {
+        coinCounter = GetComponent<CoinCounter>();
+    }
     private void OnTriggerEnter(Collider other)
     {
-       if (other.CompareTag("coin"))
-        {
-           Coin coin = other.GetComponent<Coin>();
 
+        Coin coin = null;
+        if (other.TryGetComponent(out coin))
+        {
+           
+            coinCounter.IncreaseCoinAmount(coin.GetValue());
+            Debug.Log(coinCounter.GetCoinCount());
+        }
+
+        Obstacle obstacle;
+        if (other.TryGetComponent(out obstacle)) ///
+        {
         
-            Debug.Log(coin.GetValue());
-        }
-
-        else if (other.CompareTag("Obstacle"))
-        {
-         Obstacle obstacle = other.GetComponent<Obstacle>();
-          Debug.Log(obstacle.GetCoinPenalty());
+          coinCounter.DecreaseCoinAmount(obstacle.GetCoinPenalty());
+          
+            Debug.Log(coinCounter.GetCoinCount());
 
 
         }
 
 
-    }//IM TWEAKING HHAHHAHAHAHAHAHA IM 
+    }//IM TWEAKING HHAHHAHAHAHAHAHA!!!!! IM GOING INSANE!INSANITY!MINDLESSNESS!
 
 
 

@@ -2,15 +2,38 @@ using UnityEngine;
 
 public class CoinCounter : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private int coinCount;
+
+    private void Awake()
     {
+        coinCount = 0;
+    }
+
+    public int GetCoinCount()
+    { 
+        return coinCount;
+    }
+
+    public void IncreaseCoinAmount(int amount)
+    {
+        coinCount += amount;
+    }
+
+    public void DecreaseCoinAmount(int amount)
+    {
+        if (coinCount > 0)
+        {
+           coinCount -= amount;
+        }
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
+    // public void SetCoinCount(int newCoinCount)
+    // {
+    //     coinCount = newCoinCount;
+    // }
+
+
 }
