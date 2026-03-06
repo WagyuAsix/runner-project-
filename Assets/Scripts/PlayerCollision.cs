@@ -11,30 +11,12 @@ public class PlayerCollision : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        ICollidable collidable;
 
-        Coin coin = null;
-        if (other.TryGetComponent(out coin))
+        if (other.TryGetComponent(out collidable))
         {
-           
-            coinCounter.IncreaseCoinAmount(coin.GetValue());
-            Debug.Log(coinCounter.GetCoinCount());
+            collidable.OnCollideWithPlayer(this);
         }
-
-        Obstacle obstacle;
-        if (other.TryGetComponent(out obstacle)) ///
-        {
-        
-          coinCounter.DecreaseCoinAmount(obstacle.GetCoinPenalty());
-          
-            Debug.Log(coinCounter.GetCoinCount());
-
-
-        }
-
-
-    }//IM TWEAKING HHAHHAHAHAHAHAHA!!!!! IM GOING INSANE!INSANITY!MINDLESSNESS!
-
-
-
+    }
 
 }

@@ -1,12 +1,18 @@
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
-public class Obstacle : MonoBehaviour
+public class Obstacle : MonoBehaviour, ICollidable
 {
-    [SerializeField] private int CoinPenalty;
-    public int coinPenalty;
+    [SerializeField] private int coinPenalty;
 
-    public int GetCoinPenalty()
+    public void OnCollideWithPlayer(PlayerCollision playerCollision)
     {
-        return coinPenalty;
+        CoinCounter coinCounter;
+        if (playerCollision.TryGetComponent(out coinCounter))
+        {
+            coinCounter.DecreaseCoinAmount(coinPenalty);
+            
+            Debug.Log(coinCounter.GetCoinCount());
+        }
     }
 }

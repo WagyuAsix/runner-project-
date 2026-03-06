@@ -1,8 +1,10 @@
+using TMPro;
 using UnityEngine;
 
 public class CoinCounter : MonoBehaviour
 {
     private int coinCount;
+    [SerializeField] private TextMeshProUGUI coinCountText;
 
     private void Awake()
     {
@@ -17,6 +19,8 @@ public class CoinCounter : MonoBehaviour
     public void IncreaseCoinAmount(int amount)
     {
         coinCount += amount;
+
+        RefreshCoinCountText();
     }
 
     public void DecreaseCoinAmount(int amount)
@@ -25,9 +29,14 @@ public class CoinCounter : MonoBehaviour
         {
            coinCount -= amount;
         }
-        
+
+        RefreshCoinCountText();
     }
 
+    private void RefreshCoinCountText()
+    {
+        coinCountText.text = "SOULS REAPED: " + coinCount;
+    }
 
 
     // public void SetCoinCount(int newCoinCount)
